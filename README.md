@@ -5,7 +5,7 @@ an easy way to create dynamic styles for react-native/react-native-web apps
 
 `npm install react-native-dynamic-styles`
 
-## Usage
+## Declare Styles
 
 - static styles
 
@@ -131,4 +131,41 @@ const dynamicStyles = DynamicStyleSheet.create({
         }) => isSmallAndUp ? 100 : 200
     }
 });
+```
+
+## use styles
+
+after declaring the styles you can use them by calling this hook
+
+```
+const styles = useDynamicStyles(dynamicStyles)
+```
+
+## hooks
+
+- useBreakpoints
+
+in case you want to customize the components instead of styles, you can use this hook
+
+```
+const {
+    width,
+    height,
+    isExtraSmallAndUp,
+    isExtraSmall,
+    isSmallAndUp,
+    isSmall,
+    isSmallAndDown,
+    isMediumAndUp,
+    isMedium,
+    isMediumAndDown,
+    isLargeAndUp,
+    isLarge,
+    isLargeAndDown,
+    isExtraLargeAndUp,
+    isExtraLarge,
+    isExtraLargeAndDown,
+    isExtraExtraLarge,
+    isExtraExtraLargeAndDown,
+} = useBreakpoints()
 ```
