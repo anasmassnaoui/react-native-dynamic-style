@@ -1,6 +1,8 @@
 # react-native-dynamic-styles
 an easy way to create dynamic styles for react-native/react-native-web apps
 
+[![badge](https://img.shields.io/npm/v/react-native-dynamic-style.svg)](https://www.npmjs.com/package/react-native-dynamic-style) 
+
 ## Install
 
 `npm install react-native-dynamic-styles`
