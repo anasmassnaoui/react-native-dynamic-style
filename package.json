@@ -1,6 +1,6 @@
 {
   "name": "react-native-dynamic-style",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "lightweight library for react native to manage component/screens with animation",
   "main": "index.ts",
   "scripts": {
