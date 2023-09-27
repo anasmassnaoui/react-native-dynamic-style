@@ -5,7 +5,7 @@ an easy way to create dynamic styles for react-native/react-native-web apps
 
 ## Install
 
-`npm install react-native-dynamic-styles`
+`npm install react-native-dynamic-style`
 
 ## Declare Styles
 
