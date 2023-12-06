@@ -8,6 +8,11 @@ an easy way to create dynamic styles for react-native/react-native-web apps
 `npm install react-native-dynamic-style`
 
 ## Declare Styles
+import DynamicStyleSheet
+```
+import DynamicStyleSheet from 'react-native-dynamic-style';
+```
+then you can use one of the options bellow
 
 - static styles
 
@@ -29,11 +34,11 @@ the relative font size will be calculated between those two values ex:
 
      375 --------- width --------- 1440
 
-                    ^
-                    |
-                    v
+                     ⋀
+                     |
+                     ⋁
 
-     12 ---- relative fontSize --- 35
+      12 --- relative fontSize --- 35
 
 for this to work you must pass minWidth and maxWidth to useDynamicStyles
 
@@ -140,6 +145,8 @@ const dynamicStyles = DynamicStyleSheet.create({
 after declaring the styles you can use them by calling this hook
 
 ```
+import DynamicStyleSheet, { useDynamicStyles } from 'react-native-dynamic-style'
+
 const styles = useDynamicStyles(dynamicStyles)
 ```
 
@@ -150,6 +157,8 @@ const styles = useDynamicStyles(dynamicStyles)
 in case you want to customize the components instead of styles, you can use this hook
 
 ```
+import DynamicStyleSheet, { useBreakpoints } from 'react-native-dynamic-style'
+
 const {
     width,
     height,
