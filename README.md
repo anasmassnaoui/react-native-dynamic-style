@@ -1,22 +1,32 @@
 # react-native-dynamic-styles
-an easy way to create dynamic styles for react-native/react-native-web apps
+
+An intuitive solution for creating dynamic and responsive styles in React Native and React Native Web applications.
 
 [![badge](https://img.shields.io/npm/v/react-native-dynamic-style.svg)](https://www.npmjs.com/package/react-native-dynamic-style) 
 
-## Install
+## Installation
 
-`npm install react-native-dynamic-style`
-
-## Declare Styles
-import DynamicStyleSheet
+Install the package using npm:
+```bash
+npm install react-native-dynamic-style
 ```
+
+## Usage
+
+### Importing DynamicStyleSheet
+
+Start by importing `DynamicStyleSheet`:
+```javascript
 import DynamicStyleSheet from 'react-native-dynamic-style';
 ```
-then you can use one of the options bellow
 
-- static styles
+### Declaring Styles
 
-```
+You have multiple options for declaring dynamic styles:
+
+#### Static Styles
+Define styles that remain constant regardless of screen size:
+```javascript
 const dynamicStyles = DynamicStyleSheet.create({
     container: {
         width: 100
@@ -24,29 +34,12 @@ const dynamicStyles = DynamicStyleSheet.create({
 });
 ```
 
-- relative value
+#### Relative Values
+Define styles that adjust relative to screen width. For example, if the font size is 12 on a minimum screen width of 375 and 35 on a maximum screen width of 1440, the font size will be calculated relatively between these values.
 
-let constider on minimum screen (width: 375) the font size is 12
+```javascript
+const styles = useDynamicStyles(dynamicStyles, { minWidth: 375, maxWidth: 1440 });
 
-and on the maximum screen (width: 1440) the font size is 35
-
-the relative font size will be calculated between those two values ex:
-
-     375 --------- width --------- 1440
-
-                     ⋀
-                     |
-                     ⋁
-
-      12 --- relative fontSize --- 35
-
-for this to work you must pass minWidth and maxWidth to useDynamicStyles
-
-```
-const styles = useDynamicStyles(dynamicStyles, { minWidth: 375, maxWidth: 1440 })
-```
-
-```
 const dynamicStyles = DynamicStyleSheet.create({
     text: {
         fontSize: [12, 35]
@@ -54,110 +47,93 @@ const dynamicStyles = DynamicStyleSheet.create({
 });
 ```
 
-- breakpoints
-    - on proberty
-        ```
-        const dynamicStyles = DynamicStyleSheet.create({
-            container: {
-                width: {
-                    xs: 20,
-                    s: 30,
-                    m: 40,
-                    l: 50,
-                    xl: 60,
-                    xxl: 70
-                }
-            }
-        });
-        ```
-    - on style
+#### Breakpoints
+Define styles for different breakpoints, either on individual properties or entire style objects:
 
-        ```
-        const dynamicStyles = DynamicStyleSheet.create({
-            container: {
-                xs: {
-                    width: 20
-                },
-                s: {
-                    width: 30
-                },
-                m: {
-                    width: 40
-                },
-                l: {
-                    width: 50
-                },
-                xl: {
-                    width: 60
-                },
-                xxl: {
-                    width: 70
-                }
+- On a property:
+    ```javascript
+    const dynamicStyles = DynamicStyleSheet.create({
+        container: {
+            width: {
+                xs: 20,
+                s: 30,
+                m: 40,
+                l: 50,
+                xl: 60,
+                xxl: 70
             }
-        });
-        ```
-    - combine with proberties
-
-        ```
-        const dynamicStyles = DynamicStyleSheet.create({
-            container: {
-                width: {
-                    xs: 20,
-                    s: 30,
-                },
-                m: {
-                    width: 40
-                }
+        }
+    });
+    ```
+- On a style:
+    ```javascript
+    const dynamicStyles = DynamicStyleSheet.create({
+        container: {
+            xs: {
+                width: 20
+            },
+            s: {
+                width: 30
+            },
+            m: {
+                width: 40
+            },
+            l: {
+                width: 50
+            },
+            xl: {
+                width: 60
+            },
+            xxl: {
+                width: 70
             }
-        });
-        ```
-- custom function
+        }
+    });
+    ```
+- Combining properties:
+    ```javascript
+    const dynamicStyles = DynamicStyleSheet.create({
+        container: {
+            width: {
+                xs: 20,
+                s: 30,
+            },
+            m: {
+                width: 40
+            }
+        }
+    });
+    ```
 
-```
+#### Custom Functions
+Define styles using custom functions that dynamically calculate values based on screen dimensions and breakpoints.
+
+```javascript
 const dynamicStyles = DynamicStyleSheet.create({
     container: {
         width: ({
-            width,
-            height,
-            isExtraSmallAndUp,
-            isExtraSmall,
-            isSmallAndUp,
-            isSmall,
-            isSmallAndDown,
-            isMediumAndUp,
-            isMedium,
-            isMediumAndDown,
-            isLargeAndUp,
-            isLarge,
-            isLargeAndDown,
-            isExtraLargeAndUp,
-            isExtraLarge,
-            isExtraLargeAndDown,
-            isExtraExtraLarge,
-            isExtraExtraLargeAndDown,
+            isSmallAndUp
         }) => isSmallAndUp ? 100 : 200
     }
 });
 ```
 
-## use styles
+### Using Styles
 
-after declaring the styles you can use them by calling this hook
+After declaring the styles, apply them by calling the `useDynamicStyles` hook:
+```javascript
+import DynamicStyleSheet, { useDynamicStyles } from 'react-native-dynamic-style';
 
+const styles = useDynamicStyles(dynamicStyles);
 ```
-import DynamicStyleSheet, { useDynamicStyles } from 'react-native-dynamic-style'
 
-const styles = useDynamicStyles(dynamicStyles)
-```
+### Hooks
 
-## hooks
+#### useBreakpoints
+If you need to customize components instead of styles, use the `useBreakpoints` hook to access current screen dimensions and breakpoints:
 
-- useBreakpoints
-
-in case you want to customize the components instead of styles, you can use this hook
-
-```
-import DynamicStyleSheet, { useBreakpoints } from 'react-native-dynamic-style'
+```javascript
+import { useBreakpoints } from 'react-native-dynamic-style';
 
 const {
     width,
@@ -178,5 +154,7 @@ const {
     isExtraLargeAndDown,
     isExtraExtraLarge,
     isExtraExtraLargeAndDown,
-} = useBreakpoints()
+} = useBreakpoints();
 ```
+
+This README provides a detailed guide to implementing dynamic styles in your React Native and React Native Web applications, enhancing responsiveness and adaptability across various screen sizes. With `react-native-dynamic-styles`, you can easily create and manage styles that adjust seamlessly to provide a consistent user experience.
